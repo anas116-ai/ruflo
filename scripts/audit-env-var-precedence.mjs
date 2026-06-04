@@ -99,6 +99,28 @@ const KNOWN_ESCAPE_HATCHES = new Set([
   //   See also memory.ts line 12: "#2105: --path > CLAUDE_FLOW_DB_PATH > CLAUDE_FLOW_MEMORY_PATH"
   'CLAUDE_FLOW_MEMORY_PATH',
 
+  // ── Statusline cosmetics (no CLI on the statusline; init-time settings.json) ─
+  // Added 2026-06-02: statusline is invoked by Claude Code via hook config,
+  // not by an interactive `ruflo statusline …` command line. There is no CLI
+  // surface to attach a flag to; the env reads in statusline-generator.ts
+  // are the documented configuration channel.
+  'RUFLO_STATUSLINE_COST_SYMBOL',
+  'RUFLO_STATUSLINE_HIDE_COST',
+
+  // ── Tunables for routing/learning thresholds (operator knob, not user CLI) ───
+  // Added 2026-06-02: model-router uses this as a runtime escalation threshold
+  // tuned by ops, not selected per-command. No CLI flag is wired because no
+  // single CLI invocation owns the router's lifetime.
+  'CLAUDE_FLOW_MAX_UNCERTAINTY',
+
+  // ── MCP-tool-shaped tunables (param wins over env; env is documented fallback) ─
+  // Added 2026-06-02 (ADR-089 #2246): memory_search_unified resolves namespaces
+  // in this priority: `namespace` param → `namespaces[]` param → env var →
+  // dynamic enumeration. The `namespaces[]` MCP-tool parameter IS the
+  // CLI-flag-equivalent and takes precedence (memory-tools.ts:1079-1109). The
+  // env is the documented operator fallback.
+  'CLAUDE_FLOW_MEMORY_SEARCH_NAMESPACES',
+
   // ── OS / runtime standard env ────────────────────────────────────────────────
   'HOME',
   'USERPROFILE',
